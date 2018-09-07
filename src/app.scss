@@ -1,0 +1,176 @@
+/*  reset */
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td,figure{padding:0;margin:0;}
+table{border-collapse:collapse;border-spacing:0;}
+del,ins{text-decoration:none}
+fieldset,img{border:0;}
+button,input,select,textarea{font-family:"Microsoft Yahei",Arial,Helvetica,sans-serif;}
+input,select,img{vertical-align:middle}
+input,select{outline:none}
+ul,ol{list-style:none}
+label{cursor:pointer}
+i { font-style: normal; }
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,var{font-style:normal;}
+body{-ms-text-size-adjust:none;-o-user-select:none;-o-text-size-adjust:none;user-select:none;text-size-adjust:none;font:12px "微软雅黑",Arial,Helvetica,sans-serif;min-height:100%;}
+a,button{-webkit-user-select:none;-webkit-user-drag:none;-webkit-tap-highlight-color:rgba(0,0,0,0);text-decoration: none;}
+div { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+.clearfix:after{content:"";height:0;visibility:hidden;display:block;clear:both;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+button {outline: none;border:none;}
+.clearfix{zoom:1;}
+.clear{clear:both}
+.fl{float:left;}
+.fr{float:right;}
+/*  end reset */
+
+@mixin centerX(){
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+}
+
+@mixin centerY(){
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}
+
+@mixin center(){
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform:translateX(-50%) translateY(-50%);
+  -moz-transform:translateX(-50%) translateY(-50%);
+}
+
+
+.App {
+  position: absolute;
+
+}
+
+.m_dateDay,.m_weekDay {
+  font-size:0;
+  .name {
+    width:200px;
+  }
+  .weekend {
+    background:greenyellow;
+  }
+  span {
+    display: inline-block;
+    width:40px;
+    font-size:18px;
+    text-align:center;
+    height:30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    border:solid 1px #ccc;
+    vertical-align: middle;
+
+  }
+}
+.u_hr {
+  width:100%;
+  line-height: 40px;
+  background:pink;
+  text-align:center;
+  font-size:22px;
+
+}
+.m_activeItem {
+  display: flex;
+  .name {
+    width:200px;
+    text-align:center;
+    height:30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    border:solid 1px #ccc;
+    vertical-align: middle;
+    font-size:13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .time {
+    position: relative;
+    flex-grow: 1;
+    background:blue;
+    border:solid 1px #ccc;
+    box-sizing: border-box;
+
+  }
+  .activeTime {
+    position: absolute;
+    left:0;
+    top:0;
+    width:200px;
+    height:100%;
+    background:red;
+    em {
+      background:green;
+      width:10px;
+      height:10px;
+      border-radius:100%;
+      margin-top:10px;
+    }
+    .fl {
+      margin-left:-5px;
+    }
+    .fr {
+      margin-right:-5px;
+    }
+  }
+  .addRoleButton {
+    height:100%;
+    width:60px;
+    position: absolute;
+    right:-60px;
+    top:0;
+    line-height: 30px;
+    text-align: center;
+    background:orangered;
+  }
+  .deleteButton{
+    position: absolute;
+    right:-120px;
+    top:0;
+    height:100%;
+    width:60px;
+    line-height: 30px;
+    text-align: center;
+    background:green;
+  }
+  .delete {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width:20px;
+    height:20px;
+    color: #ffffff;
+    background:rgba(0,0,0,0.2);
+    border-radius:100%;
+    text-align:center;
+    line-height:20px;
+  }
+}
+
+
+.m_roleInfo {
+  @include centerX();
+  width:200px;
+  height:100px;
+  background:blue;
+  top: -110px;
+  z-index:99999;
+  p {
+    font-size:20px;
+    line-height: 60px;
+    color: #ffffff;
+  }
+}
