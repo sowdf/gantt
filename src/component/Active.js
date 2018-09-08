@@ -7,8 +7,16 @@
 import React, {Component} from 'react';
 import model from '../Model';
 import ActiveItem from './ActiveItem';
+import PropTypes from 'prop-types';
 
 class Active extends Component {
+    constructor(){
+        super();
+    }
+
+    componentDidMount() {
+        this.context.test();
+    }
     render() {
         let {
             activeAry,
@@ -29,6 +37,10 @@ class Active extends Component {
             </div>
         );
     }
+}
+
+Active.contextTypes = {
+    test : PropTypes.any
 }
 
 export default Active;

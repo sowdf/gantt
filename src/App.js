@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import DateDay from './component/DateDay';
 import WeekDay from './component/WeekDay';
@@ -11,6 +12,7 @@ const gridHeight = 50;
 class App extends Component {
     constructor(props) {
         super(props);
+        this.test = this.test.bind(this);
         //初始化日历插件
         this.stackDatePicker = new StackDatePicker();
         this.monthDayAry = this.stackDatePicker.getMonthAry(2018, 8);
@@ -38,6 +40,18 @@ class App extends Component {
         this.monthStartTimestamp = this.monthDayAry[0].dayTimestamp;
         //一个月的开始 结束
         this.monthEndTimestamp = this.monthDayAry[this.monthDayAry.length - 1].dayTimestamp;
+        this.state = {
+            a : "dfadfads"
+        }
+    }
+
+    test() {
+        console.log(this.state);
+    }
+
+    getChildContext() {
+        console.log(this);
+        return {test: this.test,value : 3333}
     }
 
     render() {
@@ -61,5 +75,11 @@ class App extends Component {
         );
     }
 }
+
+App.childContextTypes = {
+    test: PropTypes.any,
+    value: PropTypes.string
+}
+
 
 export default App;

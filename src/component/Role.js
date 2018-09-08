@@ -8,6 +8,8 @@ import React, {Component} from 'react';
 import model from '../Model';
 import timeRepeat from "../test/timeRepeat";
 import RoleInfo from './RoleInfo';
+import PropTypes from 'prop-types';
+import Active from "./Active";
 
 
 const gridWidth = 40;
@@ -43,6 +45,7 @@ class Role extends Component {
             days : 0,
             roleInfoStatus: false
         }
+        console.log(this.context);
     }
 
     randomHexColor() { //随机生成十六进制颜色
@@ -61,6 +64,7 @@ class Role extends Component {
             left: obj.left,
             width: obj.width
         });
+        console.log(this.context);
     }
 
     //取整操作
@@ -334,6 +338,10 @@ class Role extends Component {
             </div>
         );
     }
+}
+
+Role.contextTypes = {
+    test : PropTypes.any
 }
 
 export default Role;
