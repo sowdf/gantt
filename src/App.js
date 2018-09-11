@@ -48,6 +48,8 @@ class App extends Component {
         this.activeAddRole = this.activeAddRole.bind(this);
         //修改角色 基本信息
         this.reviseRoleInfo = this.reviseRoleInfo.bind(this);
+        //删除角色信息
+        this.deleteActiveRole = this.deleteActiveRole.bind(this);
     }
     /*
     * 计算角色的 left  和 width
@@ -95,37 +97,43 @@ class App extends Component {
         let activeAry = this.state.activeAry;
         let active = activeAry[activeIndex];
         let role = active.roleAry[roleIndex];
-        let {width,left} = data;
+        let {width,left,days} = data;
+        //修改宽度
         if(width){
             role.width = width;
         }
+        //修改位置
         if(left){
             role.left = left;
         }
-
+        //修改天数
+        if(days){
+            role.days = days;
+        }
         this.setState({
             activeAry
         });
 
     }
     /*
-    * 角色移动
+    * 删除角色
     * */
-    activeRoleMove(){
-
-    }
-    /*
-    * 角色改变大小
-    * */
-    activeRoleChangeSize(){
-
+    deleteActiveRole(activeIndex,roleIndex){
+        let activeAry = this.state.activeAry;
+        let active = activeAry[activeIndex];
+        let roleAry = active.roleAry;
+        roleAry.splice(roleIndex,1);
+        this.setState({
+            activeAry
+        });
     }
 
 
     getChildContext() {
         return {
             activeAddRole:this.activeAddRole,
-            reviseRoleInfo : this.reviseRoleInfo
+            reviseRoleInfo : this.reviseRoleInfo,
+            deleteActiveRole : this.deleteActiveRole
         }
     }
 
@@ -154,7 +162,8 @@ class App extends Component {
 
 App.childContextTypes = {
     activeAddRole : PropTypes.any,
-    reviseRoleInfo : PropTypes.any
+    reviseRoleInfo : PropTypes.any,
+    deleteActiveRole : PropTypes.any
 };
 
 

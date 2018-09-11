@@ -59,15 +59,10 @@ class Role extends Component {
 
     componentDidMount() {
         let {targetStartTime, targetEndTime, roleStartTime, roleEndTime} = this.props;
-        let obj = this.roleTimeCount();
         this.days = (targetEndTime - targetStartTime) / dayTimestamp + 1;
-        console.log(this.days);
-        this.setState({
-            left: obj.left,
-            width: obj.width
-        });
         console.log(this.context);
         this.reviseRoleInfo = this.context.reviseRoleInfo;
+        this.deleteActiveRole = this.context.deleteActiveRole;
     }
 
     //取整操作
@@ -129,8 +124,8 @@ class Role extends Component {
             let {left:pLeft,width:pWidth} = this.props;
             if (aspect == 'left') {
                 let posLeft = downPosLeft - ev.clientX;
-                let width = pLeft + posLeft;
-                let left = pWidth - posLeft;
+                let width = pWidth + posLeft;
+                let left = pLeft - posLeft;
                 if (left <= 0) {
                     left = 0;
                 }
@@ -260,7 +255,7 @@ class Role extends Component {
     * 获取角色信息
     * */
     getRoleInfo(){
-        this.setState({
+        this.reviseRoleInfoHandle({
             days : this.countDays()
         });
     }
@@ -268,7 +263,7 @@ class Role extends Component {
     * 计算 天数
     * */
     countDays(){
-        let {width} = this.state;
+        let {width} = this.props;
         console.log(Math.ceil(width / gridWidth));
         return Math.ceil(width / gridWidth);
     }
@@ -307,8 +302,8 @@ class Role extends Component {
     }
 
     deleteRoleHandle(ev){
-        let {deleteRole,index} = this.props;
-        deleteRole(index);
+        let {activeIndex,roleIndex} = this.props;
+        this.deleteActiveRole(activeIndex,roleIndex);
         ev.preventDefault();
         ev.stopPropagation();
 
@@ -316,8 +311,8 @@ class Role extends Component {
 
     render() {
         let {data} = model;
-        let { zIndex, roleInfoStatus,days} = this.state;
-        let {deleteStatus,index,left,width} = this.props;
+        let { zIndex, roleInfoStatus} = this.state;
+        let {deleteStatus,index,left,width,days} = this.props;
         return (
             <div
                 style={{
@@ -356,7 +351,8 @@ class Role extends Component {
 }
 
 Role.contextTypes = {
-    reviseRoleInfo : PropTypes.any
+    reviseRoleInfo : PropTypes.any,
+    deleteActiveRole : PropTypes.any
 }
 
 export default Role;
