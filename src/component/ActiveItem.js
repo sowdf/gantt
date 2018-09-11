@@ -8,6 +8,8 @@ import React, {Component} from 'react';
 import timeRepeat from '../test/timeRepeat';
 import model from '../Model';
 import Role from "./Role";
+import PropTypes from 'prop-types';
+import Active from "./Active";
 
 const gridWidth = 40;
 const dayTimestamp = 24 * 60 * 60 * 1000;
@@ -30,20 +32,12 @@ class ActiveItem extends Component {
             deleteStatus : false
         };
     }
+
+
     //增加角色
     addRoleHandle(){
-        let {
-            monthEndTimestamp,
-        } = this.props;
-        let roleAry = this.state.roleAry;
-        let data = {
-            roleStartTime : monthEndTimestamp - dayTimestamp * 3,
-            roleEndTime : monthEndTimestamp
-        };
-        roleAry.push(data);
-        this.setState({
-            roleAry
-        });
+        let {activeIndex} = this.props;
+        this.activeAddRole(activeIndex);
     }
     deleteHandle(){
         let deleteStatus = this.state.deleteStatus;
@@ -58,13 +52,19 @@ class ActiveItem extends Component {
             roleAry
         );
     }
+
+    componentDidMount() {
+        this.activeAddRole = this.context.activeAddRole;
+    }
     render() {
         let {
             name,
+            roleAry,
             monthEndTimestamp,
             monthStartTimestamp,
+            activeIndex
         } = this.props;
-        let {roleAry,deleteStatus} = this.state;
+        let {deleteStatus} = this.state;
         return (
             <div className="m_activeItem">
                 <div className="name">
@@ -75,8 +75,11 @@ class ActiveItem extends Component {
                         roleAry.map((item,index)=>{
                             let {roleStartTime,roleEndTime} = item;
                             return <Role
+                                {...item}
                                 key={index}
                                 index={index}
+                                roleIndex ={index}
+                                activeIndex = {activeIndex}
                                 deleteStatus={deleteStatus}
                                 targetStartTime = {monthStartTimestamp}
                                 targetEndTime = {monthEndTimestamp}
@@ -99,5 +102,9 @@ class ActiveItem extends Component {
         );
     }
 }
+ActiveItem.contextTypes = {
+    activeAddRole : PropTypes.any
+}
+
 
 export default ActiveItem;

@@ -37,6 +37,7 @@ class Role extends Component {
         this.mouseUp = this.mouseUp.bind(this);
         this.countDays = this.countDays.bind(this);
         this.getRoleInfo = this.getRoleInfo.bind(this);
+        this.reviseRoleInfoHandle = this.reviseRoleInfoHandle.bind(this);
         this.days = 0;
         this.state = {
             left: 0,
@@ -60,17 +61,20 @@ class Role extends Component {
         let {targetStartTime, targetEndTime, roleStartTime, roleEndTime} = this.props;
         let obj = this.roleTimeCount();
         this.days = (targetEndTime - targetStartTime) / dayTimestamp + 1;
+        console.log(this.days);
         this.setState({
             left: obj.left,
             width: obj.width
         });
         console.log(this.context);
+        this.reviseRoleInfo = this.context.reviseRoleInfo;
     }
 
     //取整操作
     resizeLeftWidth() {
-        let left = parseInt(this.state.left);
-        let width = parseInt(this.state.width);
+        let {left:pLeft,width:pWidth} = this.props;
+        let left = parseInt(pLeft);
+        let width = parseInt(pWidth);
         //对width 取余
         let yWidth = parseInt(width % gridWidth);
         let yLeft = parseInt(left % gridWidth);
@@ -88,7 +92,7 @@ class Role extends Component {
             left = left - yLeft + gridWidth;
         }
 
-        this.setState({
+        this.reviseRoleInfoHandle({
             width,
             left
         });
@@ -122,10 +126,11 @@ class Role extends Component {
         ev.stopPropagation();
         this.mouseDown();
         document.onmousemove = (ev) => {
+            let {left:pLeft,width:pWidth} = this.props;
             if (aspect == 'left') {
                 let posLeft = downPosLeft - ev.clientX;
-                let width = this.state.width + posLeft;
-                let left = this.state.left - posLeft;
+                let width = pLeft + posLeft;
+                let left = pWidth - posLeft;
                 if (left <= 0) {
                     left = 0;
                 }
@@ -138,27 +143,27 @@ class Role extends Component {
                 if (width >= gridWidth * this.days) {
                     width = gridWidth * this.days
                 }
-                this.setState({
+                this.reviseRoleInfoHandle({
                     left,
                     width
                 });
                 downPosLeft = ev.clientX;
             } else {
                 let posLeft = ev.clientX - downPosLeft; // < 0  的一个数
-                let width = this.state.width + posLeft;
-                let left = this.state.left;
+                let width = pWidth + posLeft;
+                let left = pLeft;
                 if (left <= 0) {
                     left = 0;
                 }
                 //宽度向左拖动 变小后 要移动 left
                 if (width <= gridWidth) {
-                    width = gridWidth
+                    width = gridWidth;
                     left = left - Math.abs(posLeft);
                 }
                 if (width + left > this.days * gridWidth) {
                     width = this.days * gridWidth - left;
                 }
-                this.setState({
+                this.reviseRoleInfoHandle({
                     width,
                     left
                 });
@@ -185,20 +190,21 @@ class Role extends Component {
 
         document.onmousemove = (ev) => {
             let posLeft = downPosLeft - ev.clientX;
+            let {left:pLeft,width:pWidth} = this.props;
             if (posLeft > 0) { //向 左
-                let left = this.state.left - posLeft;
+                let left = pLeft - posLeft;
                 if (left < 0) {
                     left = 0;
                 }
-                this.setState({
+                this.reviseRoleInfoHandle({
                     left
                 });
             } else { //向右
-                let left = this.state.left - posLeft;
+                let left = pLeft - posLeft;
                 if (left > (gridWidth * this.days) - this.state.width) {
                     left = (gridWidth * this.days) - this.state.width;
                 }
-                this.setState({
+                this.reviseRoleInfoHandle({
                     left
                 });
             }
@@ -211,7 +217,16 @@ class Role extends Component {
             this.mouseUp();
         }
     }
-
+    /*
+    *  修改 角色基本信息
+    * */
+    reviseRoleInfoHandle(data){
+        /*
+        *  data  = { width : "" , left : left }
+        * */
+        let {activeIndex,roleIndex} = this.props;
+        this.reviseRoleInfo(activeIndex,roleIndex,data);
+    }
     /*
     * 角色信息显示
     * */
@@ -301,8 +316,8 @@ class Role extends Component {
 
     render() {
         let {data} = model;
-        let {width, left, zIndex, roleInfoStatus,days} = this.state;
-        let {deleteStatus,index} = this.props;
+        let { zIndex, roleInfoStatus,days} = this.state;
+        let {deleteStatus,index,left,width} = this.props;
         return (
             <div
                 style={{
@@ -341,7 +356,7 @@ class Role extends Component {
 }
 
 Role.contextTypes = {
-    test : PropTypes.any
+    reviseRoleInfo : PropTypes.any
 }
 
 export default Role;

@@ -10,13 +10,14 @@ import ActiveItem from './ActiveItem';
 import PropTypes from 'prop-types';
 
 class Active extends Component {
-    constructor(){
+    constructor() {
         super();
     }
 
     componentDidMount() {
-        this.context.test();
+        console.log(this.context);
     }
+
     render() {
         let {
             activeAry,
@@ -29,6 +30,7 @@ class Active extends Component {
                 {
                     activeAry.map((item, index) => {
                         return <ActiveItem
+                            activeIndex={index}
                             monthStartTimestamp={monthStartTimestamp}
                             monthEndTimestamp={monthEndTimestamp}
                             {...item} key={index}/>
@@ -40,7 +42,7 @@ class Active extends Component {
 }
 
 Active.contextTypes = {
-    test : PropTypes.any
+    activeAddRole: PropTypes.any
 }
 
 export default Active;
