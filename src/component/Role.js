@@ -46,7 +46,6 @@ class Role extends Component {
             days : 0,
             roleInfoStatus: false
         }
-        console.log(this.context);
     }
 
     randomHexColor() { //随机生成十六进制颜色
@@ -60,13 +59,13 @@ class Role extends Component {
     componentDidMount() {
         let {targetStartTime, targetEndTime, roleStartTime, roleEndTime} = this.props;
         this.days = (targetEndTime - targetStartTime) / dayTimestamp + 1;
-        console.log(this.context);
         this.reviseRoleInfo = this.context.reviseRoleInfo;
         this.deleteActiveRole = this.context.deleteActiveRole;
     }
 
     //取整操作
     resizeLeftWidth() {
+        console.log('取震');
         let {left:pLeft,width:pWidth} = this.props;
         let left = parseInt(pLeft);
         let width = parseInt(pWidth);
@@ -167,9 +166,9 @@ class Role extends Component {
             this.mouseMove();
         }
         document.onmouseup = () => {
-            document.onmousemove = null;
             this.mouseUp();
-
+            document.onmousemove = null;
+            document.onmouseup = null;
         }
 
     }
@@ -208,8 +207,9 @@ class Role extends Component {
         };
 
         document.onmouseup = () => {
-            document.onmousemove = null;
             this.mouseUp();
+            document.onmousemove = null;
+            document.onmouseup = null;
         }
     }
     /*
@@ -237,10 +237,6 @@ class Role extends Component {
         });
     }
 
-    /*  鼠标移动快 */
-    onMoveMouseUpHandle() {
-        document.onmousemove = null;
-    }
 
     /* 通过位置 宽度 计算  时间戳区间 */
     countTimestamp() {
@@ -323,7 +319,7 @@ class Role extends Component {
                 }}
                 className="activeTime"
                 onMouseDown={this.onMoveMouseDownHandle.bind(this)}
-                onMouseUp={this.onMoveMouseUpHandle.bind(this)}
+                onMouseUp={this.onMouseUpHandle.bind(this)}
             >
                 <RoleInfo
                     days={days}

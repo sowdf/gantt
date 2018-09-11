@@ -43,7 +43,92 @@ class App extends Component {
                 "createdAt": "2018-08-23T14:24:56.000Z",
                 "updatedAt": "2018-08-23T14:37:44.000Z",
                 "roleAry" : []
-            }]
+            },
+                {
+                    "actId": 20,
+                    "name": "游戏圈烟花会 定制明信片赢奖励",
+                    "activeStartTimeTimestampText": "1535212800000",
+                    "activeEndTimeTimestampText": "1537286400000",
+                    "start_year": 2018,
+                    "start_month": 8,
+                    "start_day": 26,
+                    "end_year": 2018,
+                    "end_month": 9,
+                    "end_day": 19,
+                    "demand_url": "https://note.youdao.com/share/?id=97741882041a80d4c4368974228b02c5&type=note#/",
+                    "operating_mid": 57,
+                    "design_mid": null,
+                    "web_mid": null,
+                    "server_mid": null,
+                    "test_mid": null,
+                    "createdAt": "2018-08-23T14:24:56.000Z",
+                    "updatedAt": "2018-08-23T14:37:44.000Z",
+                    "roleAry" : []
+                },
+                {
+                    "actId": 20,
+                    "name": "游戏圈烟花会 定制明信片赢奖励",
+                    "activeStartTimeTimestampText": "1535212800000",
+                    "activeEndTimeTimestampText": "1537286400000",
+                    "start_year": 2018,
+                    "start_month": 8,
+                    "start_day": 26,
+                    "end_year": 2018,
+                    "end_month": 9,
+                    "end_day": 19,
+                    "demand_url": "https://note.youdao.com/share/?id=97741882041a80d4c4368974228b02c5&type=note#/",
+                    "operating_mid": 57,
+                    "design_mid": null,
+                    "web_mid": null,
+                    "server_mid": null,
+                    "test_mid": null,
+                    "createdAt": "2018-08-23T14:24:56.000Z",
+                    "updatedAt": "2018-08-23T14:37:44.000Z",
+                    "roleAry" : []
+                },
+                {
+                    "actId": 20,
+                    "name": "游戏圈烟花会 定制明信片赢奖励",
+                    "activeStartTimeTimestampText": "1535212800000",
+                    "activeEndTimeTimestampText": "1537286400000",
+                    "start_year": 2018,
+                    "start_month": 8,
+                    "start_day": 26,
+                    "end_year": 2018,
+                    "end_month": 9,
+                    "end_day": 19,
+                    "demand_url": "https://note.youdao.com/share/?id=97741882041a80d4c4368974228b02c5&type=note#/",
+                    "operating_mid": 57,
+                    "design_mid": null,
+                    "web_mid": null,
+                    "server_mid": null,
+                    "test_mid": null,
+                    "createdAt": "2018-08-23T14:24:56.000Z",
+                    "updatedAt": "2018-08-23T14:37:44.000Z",
+                    "roleAry" : []
+                },
+                {
+                    "actId": 20,
+                    "name": "游戏圈烟花会 定制明信片赢奖励",
+                    "activeStartTimeTimestampText": "1535212800000",
+                    "activeEndTimeTimestampText": "1537286400000",
+                    "start_year": 2018,
+                    "start_month": 8,
+                    "start_day": 26,
+                    "end_year": 2018,
+                    "end_month": 9,
+                    "end_day": 19,
+                    "demand_url": "https://note.youdao.com/share/?id=97741882041a80d4c4368974228b02c5&type=note#/",
+                    "operating_mid": 57,
+                    "design_mid": null,
+                    "web_mid": null,
+                    "server_mid": null,
+                    "test_mid": null,
+                    "createdAt": "2018-08-23T14:24:56.000Z",
+                    "updatedAt": "2018-08-23T14:37:44.000Z",
+                    "roleAry" : []
+                }
+            ]
         };
         this.activeAddRole = this.activeAddRole.bind(this);
         //修改角色 基本信息
@@ -88,7 +173,6 @@ class App extends Component {
         this.setState({
             activeAry
         });
-        this.state.activeAry;
     }
     /*
     * 修改 角色基本信息
